@@ -1,0 +1,276 @@
+{
+  "categories": ["All", "Coffee", "Tea", "Pastries", "Food", "Travel Specials"],
+  "items": [
+    {
+      "id": "1",
+      "name": "Espresso",
+      "description": "Rich, bold shot of pure coffee perfection",
+      "price": 3.50,
+      "category": "Coffee",
+      "tags": ["Hot"],
+      "image": "/images/menu/espresso.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Cappuccino",
+      "description": "Classic Italian coffee with velvety foam",
+      "price": 4.50,
+      "category": "Coffee",
+      "tags": ["Hot", "Popular"],
+      "image": "/images/menu/cappuccino.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Latte",
+      "description": "Smooth espresso with steamed milk artistry",
+      "price": 4.75,
+      "category": "Coffee",
+      "tags": ["Hot", "Popular"],
+      "image": "/images/menu/latte.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Americano",
+      "description": "Bold espresso with hot water",
+      "price": 3.75,
+      "category": "Coffee",
+      "tags": ["Hot"],
+      "image": "/images/menu/americano.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Mocha",
+      "description": "Chocolate and espresso harmony",
+      "price": 5.25,
+      "category": "Coffee",
+      "tags": ["Hot", "Popular"],
+      "image": "/images/menu/mocha.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Caramel Macchiato",
+      "description": "Sweet caramel with espresso layers",
+      "price": 5.50,
+      "category": "Coffee",
+      "tags": ["Hot", "New"],
+      "image": "/images/menu/caramel-macchiato.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Flat White",
+      "description": "Microfoam perfection from down under",
+      "price": 4.50,
+      "category": "Coffee",
+      "tags": ["Hot"],
+      "image": "/images/menu/flat-white.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Cortado",
+      "description": "Perfect espresso to milk ratio",
+      "price": 4.00,
+      "category": "Coffee",
+      "tags": ["Hot"],
+      "image": "/images/menu/cortado.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Iced Coffee",
+      "description": "Refreshing cold brew perfection",
+      "price": 4.25,
+      "category": "Coffee",
+      "tags": [],
+      "image": "/images/menu/iced-coffee.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Cold Brew",
+      "description": "Smooth, naturally sweet cold extraction",
+      "price": 5.00,
+      "category": "Coffee",
+      "tags": ["Popular"],
+      "image": "/images/menu/cold-brew.jpg"
+    },
+    {
+      "id": "11",
+      "name": "Nitro Cold Brew",
+      "description": "Creamy, cascading coffee magic",
+      "price": 5.75,
+      "category": "Coffee",
+      "tags": ["New", "Popular"],
+      "image": "/images/menu/nitro-cold-brew.jpg"
+    },
+    {
+      "id": "12",
+      "name": "Vietnamese Coffee",
+      "description": "Sweet condensed milk and bold coffee",
+      "price": 5.25,
+      "category": "Coffee",
+      "tags": ["New"],
+      "image": "/images/menu/vietnamese-coffee.jpg"
+    },
+    {
+      "id": "13",
+      "name": "Turkish Coffee",
+      "description": "Traditional thick and aromatic",
+      "price": 4.50,
+      "category": "Coffee",
+      "tags": ["Hot"],
+      "image": "/images/menu/turkish-coffee.jpg"
+    },
+    {
+      "id": "14",
+      "name": "Affogato",
+      "description": "Espresso meets vanilla ice cream",
+      "price": 6.00,
+      "category": "Coffee",
+      "tags": ["New"],
+      "image": "/images/menu/affogato.jpg"
+    },
+    {
+      "id": "15",
+      "name": "Matcha Latte",
+      "description": "Premium Japanese green tea",
+      "price": 5.50,
+      "category": "Tea",
+      "tags": ["Hot", "Popular"],
+      "image": "/images/menu/matcha-latte.jpg"
+    },
+    {
+      "id": "16",
+      "name": "Chai Latte",
+      "description": "Spiced tea with steamed milk",
+      "price": 4.75,
+      "category": "Tea",
+      "tags": ["Hot", "Popular"],
+      "image": "/images/menu/chai-latte.jpg"
+    },
+    {
+      "id": "17",
+      "name": "Hot Chocolate",
+      "description": "Rich Belgian chocolate",
+      "price": 4.50,
+      "category": "Tea",
+      "tags": ["Hot"],
+      "image": "/images/menu/hot-chocolate.jpg"
+    },
+    {
+      "id": "18",
+      "name": "Croissant",
+      "description": "Buttery, flaky French pastry",
+      "price": 3.50,
+      "category": "Pastries",
+      "tags": ["Popular"],
+      "image": "/images/menu/croissant.jpg"
+    },
+    {
+      "id": "19",
+      "name": "Chocolate Croissant",
+      "description": "Pain au chocolat perfection",
+      "price": 4.00,
+      "category": "Pastries",
+      "tags": ["Popular"],
+      "image": "/images/menu/chocolate-croissant.jpg"
+    },
+    {
+      "id": "20",
+      "name": "Almond Croissant",
+      "description": "Sweet almond cream filled",
+      "price": 4.50,
+      "category": "Pastries",
+      "tags": ["New"],
+      "image": "/images/menu/almond-croissant.jpg"
+    },
+    {
+      "id": "21",
+      "name": "Blueberry Muffin",
+      "description": "Fresh berries in moist cake",
+      "price": 3.75,
+      "category": "Pastries",
+      "tags": [],
+      "image": "/images/menu/blueberry-muffin.jpg"
+    },
+    {
+      "id": "22",
+      "name": "Banana Bread",
+      "description": "Homemade with walnuts",
+      "price": 3.50,
+      "category": "Pastries",
+      "tags": ["Popular"],
+      "image": "/images/menu/banana-bread.jpg"
+    },
+    {
+      "id": "23",
+      "name": "Carrot Cake",
+      "description": "Cream cheese frosting heaven",
+      "price": 5.50,
+      "category": "Pastries",
+      "tags": ["Popular"],
+      "image": "/images/menu/carrot-cake.jpg"
+    },
+    {
+      "id": "24",
+      "name": "Cheesecake",
+      "description": "New York style creamy",
+      "price": 6.00,
+      "category": "Pastries",
+      "tags": ["New", "Popular"],
+      "image": "/images/menu/cheesecake.jpg"
+    },
+    {
+      "id": "25",
+      "name": "Tiramisu",
+      "description": "Classic Italian coffee dessert",
+      "price": 6.50,
+      "category": "Pastries",
+      "tags": ["New", "Popular"],
+      "image": "/images/menu/tiramisu.jpg"
+    },
+    {
+      "id": "26",
+      "name": "Brownie",
+      "description": "Fudgy chocolate indulgence",
+      "price": 4.00,
+      "category": "Pastries",
+      "tags": ["Popular"],
+      "image": "/images/menu/brownie.jpg"
+    },
+    {
+      "id": "27",
+      "name": "Cookies (3pc)",
+      "description": "Chocolate chip perfection",
+      "price": 4.50,
+      "category": "Pastries",
+      "tags": [],
+      "image": "/images/menu/cookies.jpg"
+    },
+    {
+      "id": "28",
+      "name": "Bagel with Cream Cheese",
+      "description": "Freshly baked daily",
+      "price": 4.00,
+      "category": "Food",
+      "tags": [],
+      "image": "/images/menu/bagel.jpg"
+    },
+    {
+      "id": "29",
+      "name": "Avocado Toast",
+      "description": "Sourdough with poached egg",
+      "price": 7.50,
+      "category": "Food",
+      "tags": ["New", "Popular"],
+      "image": "/images/menu/avocado-toast.jpg"
+    },
+    {
+      "id": "30",
+      "name": "Breakfast Sandwich",
+      "description": "Egg, cheese, bacon on croissant",
+      "price": 6.50,
+      "category": "Food",
+      "tags": ["Popular"],
+      "image": "/images/menu/breakfast-sandwich.jpg"
+    }
+  ]
+}
+
