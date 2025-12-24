@@ -69,33 +69,75 @@ export default function TravelDestinations() {
           {destinations.map((destination, index) => (
             <motion.div
               key={destination.country}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+              whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ 
+                delay: index * 0.1, 
+                duration: 0.8,
+                type: "spring",
+                stiffness: 100
+              }}
+              whileHover={{ 
+                scale: 1.05,
+                rotateY: 5,
+                z: 50,
+                transition: { duration: 0.3 }
+              }}
               className="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer"
             >
-              <div className="absolute inset-0">
+              <motion.div 
+                className="absolute inset-0"
+                whileHover={{ scale: 1.2 }}
+                transition={{ duration: 0.6 }}
+              >
                 <Image
                   src={destination.image}
                   alt={destination.country}
                   fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="object-cover"
+                  unoptimized
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-              </div>
-              <div className="absolute inset-0 flex flex-col items-center justify-end p-4 text-center">
-                <div className="text-4xl mb-2">{destination.flag}</div>
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+                  whileHover={{ opacity: 0.6 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.div>
+              <motion.div 
+                className="absolute inset-0 flex flex-col items-center justify-end p-4 text-center"
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 + 0.3 }}
+              >
+                <motion.div 
+                  className="text-4xl mb-2"
+                  whileHover={{ scale: 1.3, rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {destination.flag}
+                </motion.div>
                 <h3 className="font-heading text-lg font-bold text-white mb-1">
                   {destination.country}
                 </h3>
                 <p className="font-body text-xs text-white/90">
                   {destination.specialty}
                 </p>
-              </div>
-              <div className="absolute top-3 right-3">
-                <MapPin className="w-5 h-5 text-gold" />
-              </div>
+              </motion.div>
+              <motion.div 
+                className="absolute top-3 right-3"
+                whileHover={{ scale: 1.3, rotate: 15 }}
+                transition={{ type: "spring" }}
+              >
+                <MapPin className="w-5 h-5 text-gold drop-shadow-lg" />
+              </motion.div>
+              {/* Shine effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                initial={{ x: "-100%", skewX: -20 }}
+                whileHover={{ x: "200%", transition: { duration: 0.8 } }}
+              />
             </motion.div>
           ))}
         </div>

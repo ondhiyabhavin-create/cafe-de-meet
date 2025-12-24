@@ -233,10 +233,21 @@ export default function Contact() {
 
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    y: -2,
+                    boxShadow: "0 10px 25px rgba(139,69,19,0.3)"
+                  }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-4 bg-brown-primary dark:bg-gold text-white dark:text-brown-dark rounded-2xl font-accent font-semibold text-lg hover:bg-brown-secondary dark:hover:bg-gold/90 transition-colors flex items-center justify-center gap-2"
+                  className="relative w-full py-4 bg-gradient-to-r from-[#8B4513] to-[#D2691E] dark:from-[#FFD700] dark:to-[#FFA500] text-white dark:text-brown-dark rounded-2xl font-accent font-semibold text-lg overflow-hidden group transition-all flex items-center justify-center gap-2"
                 >
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-[#D2691E] to-[#8B4513] dark:from-[#FFA500] dark:to-[#FFD700]"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.5 }}
+                  />
+                  <span className="relative z-10">
                   {submitted ? (
                     <>
                       <CheckCircle className="w-5 h-5" />
@@ -245,6 +256,7 @@ export default function Contact() {
                   ) : (
                     'Send Message'
                   )}
+                  </span>
                 </motion.button>
               </form>
             </motion.div>

@@ -2,16 +2,82 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Search, Plus, MapPin } from 'lucide-react'
+import { Search, MapPin } from 'lucide-react'
 import Image from 'next/image'
 import { menuItems, categories } from '@/data/menuItems'
-import { useCart } from '@/store/useCart'
-import { MenuItem } from '@/store/useCart'
+
+// Function to get proper image URLs for menu items
+const getMenuImageUrl = (name: string, category: string) => {
+  // Coffee images
+  const coffeeImages = [
+    'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=300&fit=crop&q=80',
+  ]
+  
+  // Pastry/Food images
+  const foodImages = [
+    'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1607958996343-3ffc38c8b0a4?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=300&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop&q=80',
+  ]
+  
+  // Map specific items to images
+  const imageMap: Record<string, string> = {
+    'Espresso': coffeeImages[0],
+    'Cappuccino': coffeeImages[1],
+    'Latte': coffeeImages[2],
+    'Americano': coffeeImages[3],
+    'Mocha': coffeeImages[4],
+    'Caramel Macchiato': coffeeImages[5],
+    'Flat White': coffeeImages[6],
+    'Cortado': coffeeImages[7],
+    'Iced Coffee': coffeeImages[4],
+    'Cold Brew': coffeeImages[3],
+    'Nitro Cold Brew': coffeeImages[2],
+    'Vietnamese Coffee': coffeeImages[1],
+    'Turkish Coffee': coffeeImages[0],
+    'Affogato': coffeeImages[5],
+    'Matcha Latte': coffeeImages[6],
+    'Chai Latte': coffeeImages[7],
+    'Hot Chocolate': coffeeImages[4],
+    'Croissant': foodImages[0],
+    'Chocolate Croissant': foodImages[0],
+    'Almond Croissant': foodImages[0],
+    'Blueberry Muffin': foodImages[1],
+    'Banana Bread': foodImages[1],
+    'Carrot Cake': foodImages[2],
+    'Cheesecake': foodImages[2],
+    'Tiramisu': foodImages[2],
+    'Brownie': foodImages[3],
+    'Cookies (3pc)': foodImages[3],
+    'Bagel with Cream Cheese': foodImages[1],
+    'Avocado Toast': foodImages[1],
+    'Breakfast Sandwich': foodImages[0],
+  }
+  
+  // Return mapped image or fallback based on category
+  if (imageMap[name]) {
+    return imageMap[name]
+  }
+  
+  // Fallback based on category
+  if (category === 'Coffee' || category === 'Tea') {
+    return coffeeImages[Math.floor(Math.random() * coffeeImages.length)]
+  }
+  
+  return foodImages[Math.floor(Math.random() * foodImages.length)]
+}
 
 export default function Menu() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [searchQuery, setSearchQuery] = useState('')
-  const { addItem } = useCart()
 
   const filteredItems = menuItems.filter((item) => {
     const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory
@@ -22,10 +88,6 @@ export default function Menu() {
 
   // Show only first 9 items for compact view
   const displayedItems = filteredItems.slice(0, 9)
-
-  const handleAddToCart = (item: MenuItem) => {
-    addItem(item)
-  }
 
   return (
     <section id="menu" className="py-20 bg-gradient-to-b from-white via-gray-50 to-white dark:from-brown-dark dark:to-brown-dark/90">
@@ -76,8 +138,8 @@ export default function Menu() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full font-accent text-sm font-semibold transition-all duration-300 ${
                   selectedCategory === category
-                    ? 'bg-gradient-to-r from-brown-primary to-brown-secondary dark:from-gold dark:to-yellow-400 text-white shadow-md scale-105'
-                    : 'bg-white dark:bg-brown-dark/50 text-brown-primary dark:text-gold hover:bg-gray-100 dark:hover:bg-brown-dark/70 shadow-sm'
+                    ? 'bg-gradient-to-r from-[#8B4513] via-[#A0522D] to-[#D2691E] dark:from-[#FFD700] dark:via-[#FFA500] dark:to-[#FF8C00] text-white shadow-lg scale-105'
+                    : 'bg-white dark:bg-brown-dark/50 text-brown-primary dark:text-gold hover:bg-gray-100 dark:hover:bg-brown-dark/70 shadow-sm border border-gray-200 dark:border-brown-dark/30'
                 }`}
               >
                 {category}
@@ -99,56 +161,94 @@ export default function Menu() {
             {displayedItems.map((item, index) => (
               <motion.div
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05, duration: 0.4 }}
-                className="group relative bg-white dark:bg-brown-dark/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100 dark:border-brown-dark/30"
+                initial={{ opacity: 0, y: 50, scale: 0.9, rotateX: -15 }}
+                animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+                transition={{ 
+                  delay: index * 0.08, 
+                  duration: 0.6,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                whileHover={{ 
+                  y: -8,
+                  scale: 1.02,
+                  rotateY: 2,
+                  transition: { duration: 0.3 }
+                }}
+                className="group relative bg-white dark:bg-brown-dark/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-brown-dark/30"
               >
-                {/* Compact Image */}
+                {/* Compact Image with enhanced effects */}
                 <div className="relative h-40 overflow-hidden bg-gradient-to-br from-brown-primary/10 to-gold/10">
-                  <Image
-                    src={item.image || `https://source.unsplash.com/400x300/?${item.name.toLowerCase().replace(/\s+/g, '-')}`}
-                    alt={item.name}
-                    fill
-                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  <motion.div
+                    whileHover={{ scale: 1.15 }}
+                    transition={{ duration: 0.6 }}
+                    className="relative w-full h-full"
+                  >
+                    <Image
+                      src={getMenuImageUrl(item.name, item.category)}
+                      alt={item.name}
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                  </motion.div>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent"
+                    initial={{ opacity: 0.7 }}
+                    whileHover={{ opacity: 0.4 }}
+                    transition={{ duration: 0.3 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   {item.tags && item.tags.length > 0 && (
-                    <div className="absolute top-3 right-3 flex gap-1.5">
-                      {item.tags.slice(0, 2).map((tag) => (
-                        <span
+                    <motion.div 
+                      className="absolute top-3 right-3 flex gap-1.5"
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.08 + 0.3 }}
+                    >
+                      {item.tags.slice(0, 2).map((tag, tagIndex) => (
+                        <motion.span
                           key={tag}
+                          initial={{ scale: 0, rotate: -180 }}
+                          whileInView={{ scale: 1, rotate: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.08 + tagIndex * 0.1 + 0.4, type: "spring" }}
+                          whileHover={{ scale: 1.1, rotate: 5 }}
                           className="px-2 py-1 bg-gold text-brown-dark text-xs font-accent font-bold rounded-lg shadow-md backdrop-blur-sm"
                         >
                           {tag}
-                        </span>
+                        </motion.span>
                       ))}
-                    </div>
+                    </motion.div>
                   )}
+                  {/* Shine effect on hover */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    initial={{ x: "-100%", skewX: -20 }}
+                    whileHover={{ x: "200%", transition: { duration: 0.8 } }}
+                  />
                 </div>
 
                 {/* Compact Content */}
-                <div className="p-4">
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-heading text-lg font-bold text-brown-primary dark:text-gold flex-1 pr-2">
-                      {item.name}
-                    </h3>
-                    <span className="font-display text-xl font-bold bg-gradient-to-r from-gold to-brown-primary bg-clip-text text-transparent whitespace-nowrap">
-                      ${item.price.toFixed(2)}
-                    </span>
-                  </div>
-                  <p className="font-body text-xs text-brown-light dark:text-cornsilk/80 mb-3 line-clamp-2 leading-relaxed">
-                    {item.description}
-                  </p>
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => handleAddToCart(item)}
-                    className="w-full py-2.5 bg-gradient-to-r from-brown-primary to-brown-secondary dark:from-gold dark:to-yellow-400 text-white dark:text-brown-dark rounded-xl font-accent font-semibold text-sm hover:shadow-md transition-all flex items-center justify-center gap-2"
+                <div className="p-5">
+                  <motion.h3 
+                    className="font-heading text-xl font-bold text-brown-primary dark:text-gold mb-3 group-hover:text-gold transition-colors"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.08 + 0.2 }}
                   >
-                    <Plus className="w-4 h-4" />
-                    Add
-                  </motion.button>
+                    {item.name}
+                  </motion.h3>
+                  <motion.p 
+                    className="font-body text-sm text-brown-light dark:text-cornsilk/80 leading-relaxed"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.08 + 0.3 }}
+                  >
+                    {item.description}
+                  </motion.p>
                 </div>
               </motion.div>
             ))}

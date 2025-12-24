@@ -2,19 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ShoppingCart, Moon, Sun, Menu, X } from 'lucide-react'
+import { Moon, Sun, Menu, X } from 'lucide-react'
 import Link from 'next/link'
-import { useCart } from '@/store/useCart'
 import { useDarkMode } from '@/store/useDarkMode'
-import CartDrawer from './CartDrawer'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [cartOpen, setCartOpen] = useState(false)
-  const { getItemCount } = useCart()
   const { isDark, toggle } = useDarkMode()
-  const itemCount = getItemCount()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +23,6 @@ export default function Navbar() {
     { href: '#home', label: 'Home' },
     { href: '#menu', label: 'Menu' },
     { href: '#about', label: 'About' },
-    { href: '#gallery', label: 'Gallery' },
     { href: '#contact', label: 'Contact' },
   ]
 
@@ -78,8 +72,10 @@ export default function Navbar() {
 
             {/* Right Icons */}
             <div className="flex items-center space-x-4">
-              <button
+              <motion.button
                 onClick={toggle}
+                whileHover={{ scale: 1.1, rotate: 15 }}
+                whileTap={{ scale: 0.9 }}
                 className="p-2 rounded-2xl hover:bg-white/20 transition-colors"
                 aria-label="Toggle dark mode"
               >
@@ -89,33 +85,37 @@ export default function Navbar() {
                 >
                   {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                 </motion.div>
-              </button>
-
-              <button
-                onClick={() => setCartOpen(true)}
-                className="relative p-2 rounded-2xl hover:bg-white/20 transition-colors"
-                aria-label="Shopping cart"
-              >
-                <ShoppingCart className="w-5 h-5" />
-                {itemCount > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-gold text-brown-dark text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center"
-                  >
-                    {itemCount}
-                  </motion.span>
-                )}
-              </button>
+              </motion.button>
 
               {/* Mobile Menu Button */}
-              <button
+              <motion.button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                whileTap={{ scale: 0.9 }}
                 className="md:hidden p-2 rounded-2xl hover:bg-white/20 transition-colors"
                 aria-label="Menu"
               >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
+                <AnimatePresence mode="wait">
+                  {mobileMenuOpen ? (
+                    <motion.div
+                      key="close"
+                      initial={{ rotate: -90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: 90, opacity: 0 }}
+                    >
+                      <X className="w-6 h-6" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="menu"
+                      initial={{ rotate: 90, opacity: 0 }}
+                      animate={{ rotate: 0, opacity: 1 }}
+                      exit={{ rotate: -90, opacity: 0 }}
+                    >
+                      <Menu className="w-6 h-6" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.button>
             </div>
           </div>
         </div>
@@ -145,8 +145,6 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </motion.nav>
-
-      <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </>
   )
 }

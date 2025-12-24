@@ -70,45 +70,53 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gold/30 transform md:-translate-x-1/2" />
-          
-          <div className="space-y-12">
-            {milestones.map((milestone, index) => (
-              <motion.div
-                key={milestone.year}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.6 }}
-                className={`flex flex-col md:flex-row items-start gap-8 ${
-                  index % 2 === 0 ? 'md:flex-row-reverse' : ''
-                }`}
-              >
-                {/* Year Bubble */}
-                <div className="relative z-10 flex-shrink-0">
-                  <div className="w-16 h-16 bg-gold rounded-full flex items-center justify-center">
-                    <span className="font-accent font-bold text-brown-dark text-sm">
+        {/* Modern Timeline - Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {milestones.map((milestone, index) => (
+            <motion.div
+              key={milestone.year}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.15, duration: 0.6 }}
+              className="group relative"
+            >
+              <div className="bg-white dark:bg-brown-dark/50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100 dark:border-brown-dark/30">
+                {/* Year Badge */}
+                <div className="flex items-center gap-4 mb-4">
+                  <motion.div 
+                    className="w-14 h-14 bg-gradient-to-br from-[#FFD700] via-[#FFA500] to-[#FF8C00] rounded-2xl flex items-center justify-center shadow-lg relative overflow-hidden"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    transition={{ type: "spring" }}
+                  >
+                    <motion.div
+                      className="absolute inset-0 bg-white/20"
+                      animate={{
+                        x: ["-100%", "100%"],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        repeatDelay: 1,
+                      }}
+                    />
+                    <span className="font-accent font-bold text-brown-dark text-sm relative z-10">
                       {milestone.year}
                     </span>
-                  </div>
+                  </motion.div>
+                  <div className="h-px flex-1 bg-gradient-to-r from-[#FFD700]/60 via-[#FFA500]/40 to-transparent" />
                 </div>
 
-                {/* Story Card */}
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : ''}`}>
-                  <div className="bg-white dark:bg-brown-dark/50 rounded-2xl p-6 shadow-lg">
-                    <h3 className="font-heading text-2xl font-semibold text-brown-primary dark:text-gold mb-3">
-                      {milestone.title}
-                    </h3>
-                    <p className="font-body text-brown-light dark:text-cornsilk/80">
-                      {milestone.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                {/* Content */}
+                <h3 className="font-heading text-2xl font-bold text-brown-primary dark:text-gold mb-3">
+                  {milestone.title}
+                </h3>
+                <p className="font-body text-brown-light dark:text-cornsilk/80 leading-relaxed">
+                  {milestone.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

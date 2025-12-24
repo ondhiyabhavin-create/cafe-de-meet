@@ -104,28 +104,59 @@ export default function Testimonials() {
                   transition={{ duration: 0.4 }}
                   className="bg-white dark:bg-brown-dark/50 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow"
                 >
-                  <Quote className="w-8 h-8 text-gold mb-4" />
+                  <motion.div
+                    initial={{ scale: 0, rotate: -180 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1, type: "spring" }}
+                    whileHover={{ scale: 1.2, rotate: 15 }}
+                  >
+                    <Quote className="w-8 h-8 text-[#FFD700] mb-4 drop-shadow-lg" />
+                  </motion.div>
                   <p className="font-body italic text-lg text-brown-light dark:text-cornsilk/80 mb-6">
                     &ldquo;{testimonial.text}&rdquo;
                   </p>
-                  <div className="flex items-center gap-1 mb-4">
+                  <motion.div 
+                    className="flex items-center gap-1 mb-4"
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                  >
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-gold text-gold" />
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + i * 0.1, type: "spring" }}
+                        whileHover={{ scale: 1.2, rotate: 15 }}
+                      >
+                        <Star className="w-5 h-5 fill-[#FFD700] text-[#FFD700]" />
+                      </motion.div>
                     ))}
-                  </div>
+                  </motion.div>
                   <div className="flex items-center gap-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-gold">
+                    <motion.div 
+                      className="relative w-16 h-16 rounded-full overflow-hidden border-4 border-[#FFD700] shadow-lg"
+                      whileHover={{ scale: 1.1, rotate: 360 }}
+                      transition={{ duration: 0.5 }}
+                    >
                       <Image
                         src={testimonial.image}
                         alt={testimonial.name}
                         fill
                         className="object-cover"
                       />
-                    </div>
+                    </motion.div>
                     <div>
-                      <h4 className="font-accent font-semibold text-lg text-brown-primary dark:text-gold">
+                      <motion.h4 
+                        className="font-accent font-semibold text-lg text-brown-primary dark:text-[#FFD700]"
+                        whileHover={{ x: 5 }}
+                        transition={{ type: "spring" }}
+                      >
                         {testimonial.name}
-                      </h4>
+                      </motion.h4>
                       <p className="font-body text-sm text-brown-light dark:text-cornsilk/60">
                         {testimonial.date}
                       </p>
@@ -150,10 +181,10 @@ export default function Testimonials() {
                 <button
                   key={index}
                   onClick={() => goToSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all ${
+                  className={`h-3 rounded-full transition-all ${
                     Math.floor(currentIndex / 3) === Math.floor(index / 3)
-                      ? 'bg-gold w-8'
-                      : 'bg-brown-primary/30'
+                      ? 'bg-gradient-to-r from-[#FFD700] to-[#FFA500] w-8 shadow-lg'
+                      : 'bg-brown-primary/30 w-3'
                   }`}
                 />
               ))}
